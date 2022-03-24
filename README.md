@@ -35,4 +35,7 @@ https://stark-tor-89760.herokuapp.com/
 
 
 # 程式和資料庫架設在不同VM中 -> Azure和AWS創VM可運行。
-# TODO: Sqlite改串PostgreSQL
+
+# 誤推檔案中的內容, 更改commit紀錄教學ref: https://reurl.cc/Wk9ELx
+# 串接PostgreSQL ref: https://reurl.cc/02NOOk
+
