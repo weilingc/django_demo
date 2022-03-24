@@ -1,0 +1,38 @@
+<!-- myorders.html -->
+{% extends 'base.html' %}
+{% load i18n %}
+{% block title %} {% trans "Orders" %} {% endblock %}
+{% block content %}
+    <div class='container'>
+        <div class='row'>
+            <div class='col-md-12'>
+                <div class='panel panel-warning'>
+                    <div class='panel-heading' align=center>
+                        <h3>{% trans "current orders" %}</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container-fluid px-5 mt-5">
+        <table class="table table-responsive table-hover mt-3 min-height-30">
+            <thead>
+                <tr class="table-Warning">
+                    <th>{% trans "Order Number" %}</th>
+                    <th>{% trans "Order Total" %}</th>
+                    <th>{% trans "Order Date" %}</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for order in orders %}
+                    <tr>
+                        <td><a href="{% url 'order_detail-url' order.id %}">{{order.id}}</a></td>
+                        <td>{{ order.total }}</td>
+                        <td>{{ order.created_date }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

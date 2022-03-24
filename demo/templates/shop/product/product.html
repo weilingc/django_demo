@@ -1,0 +1,65 @@
+<!-- index.html -->
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+{% block title %} {% trans "Product" %} {% endblock %}
+{% block img %} /./static/images/board.jpg {% endblock %}
+{% block content %}
+<div class='bkimg'>
+</div>
+    <div class='container'>
+        <div class="page-header">
+            <h1 class="shop_title" style="text-align:center">{{cate_name}}</h1>
+        </div>
+        {% comment %} <div class='row'>
+            <div class='col-md-12'>
+                <div class='panel panel-default'>
+                    <div class='panel-heading' align=center>
+                        <h3>{{cate_name}}</h3>
+                    </div>
+                </div>
+            </div>
+        </div> {% endcomment %}
+        
+        {% comment %} <div class='row'>
+            <div class='col-x3-3 col-sm-3 col-md-3'>
+                <h3>摘要</h3>
+            </div>
+        </div> {% endcomment %}
+
+        <div class='row'>
+                <button class='btn btn-info'>
+                    目前是第{{p_products.number}}頁
+                </button>
+            {% if p_products.has_previous %}
+                <button class='btn btn-info'>
+                    <a href='?p={{ p_products.previous_page_number }}'>上一頁</a>
+                </button>
+            {% endif %}
+            {% if p_products.has_next %}
+                <button class='btn btn-info'>
+                    <a href='?p={{ p_products.next_page_number }}'>下一頁</a>
+                </button>
+            {% endif %}
+        </div>
+
+
+        {% comment %} {% for product in products %} {% endcomment %}
+        {% for p in p_products %}
+        <div class='col-xs-3 col-sm-3 col-md-3'>
+            <div class='thumbnail'>
+                <div class='caption'>
+                    <a href='{% url "product-url" p.id %}'><img src='{{ p.image }}' width="60%"></a>
+                    <h4 class='text-center'><a href='{% url "product-url" p.id %}'>{{p.name}}</a></h4>
+                    <p class='text-center'>NT${{p.price}}</p>
+                    {% comment %} {% if user.is_authenticated %}
+                        <button class='btn btn-info' {{product.stock | yesno:",disabled"}}>
+                            <a href='{% url "additem-url" product.id 1 %}'>放入購物車</a>
+                        </button>
+                    {% endif %} {% endcomment %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}

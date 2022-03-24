@@ -1,0 +1,20 @@
+<!-- order_create.html -->
+{% extends 'base.html' %}
+{% load i18n %}
+{% block title %} 產品 {% endblock %}
+{% block content %}
+    <div class='container'>
+        <div class='row'>
+            <div class='col-md-12'>
+                <div class='panel panel-default'>
+                    <div class='panel-heading' align=center>
+                        <h3>{% trans "Order Confirmed" %}</h3>
+                    </div>
+                </div>
+                <div class='panel panel-body'>
+                    <h3>{{user}}，{% trans "Thank you for your order!" %}</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,16 @@
+<!-- index.html -->
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+{% block title %} {% trans "Index" %} {% endblock %}
+{% block img %} static/images/board.jpg {% endblock %}
+{% block content %}
+<div class='bkimg'>
+    {% comment %} <img src="{% static 'images/board.jpg' %}"> {% endcomment %}
+</div>
+    <div class='container'>
+        <div>
+            <p class="shop_title" style="text-align:center">{% trans "DEMO" %}</p>
+        </div>
+    </div>
+{% endblock %}

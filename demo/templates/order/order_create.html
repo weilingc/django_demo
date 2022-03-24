@@ -1,0 +1,71 @@
+<!-- order_create.html -->
+{% extends 'base.html' %}
+{% load i18n %}
+{% block title %} 產品 {% endblock %}
+{% block content %}
+    <div class='container'>
+        <div class='row'>
+            <div class='col-md-12'>
+                <div class='panel panel-default'>
+                    <div class='panel-heading' align=center>
+                        <h3>訂單確認</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container-fluid px-5 mt-5">
+        <table class="table table-responsive table-hover mt-3 min-height-30">
+            <thead>
+                <tr class="table-Warning">
+                    <th>產品</th>
+                    <th>數量</th>
+                    <th>單價</th>
+                    <th>價格</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for item in cart %}
+                    {% with product=item.product %}
+                    <tr>
+                        <td>{{ product.name }}</td>
+                        <td>{{ item.quantity }}</td>
+                        <td>{{ item.price }}</td>
+                        <td>{{ item.total_price }}</td>
+                    </tr>
+                    {% endwith %}
+                {% endfor %}
+                <tr class="demo-blue">
+                    <td>Total</td>
+                    <td colspan="2"></td>
+                    <td>{{ cart.get_total_price }}</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <form action="/order/order_confirmed/" method="POST">{% csrf_token %}
+        <table>
+        <h4>{% trans "Recevier Detail" %}</h4>
+                <tr>
+                    <th> <label for="fullname">{% trans "Name" %}：</label> </th>
+                    <td> {{ form.full_name  }} </td>
+                </tr>
+                <tr>
+                    <th> <label for="address">{% trans "Address" %}：</label> </th>
+                    <td> {{ form.address }} </td>
+                </tr>
+                <tr>
+                    <th> <label for="postral_code">{% trans "Postral Code" %}：</label> </th>
+                    <td> {{ form.postal_code }} </td>
+                </tr>
+                <tr>
+                    <th> <label for="phone">電話：</label> </th>
+                    <td> {{ form.phone }} </td>
+                </tr>
+            </table>
+            <input type="submit" value="{% trans 'Confirm' %}">
+        {% comment %} <td><input onclick="window.location.href='{% url "order_confirmed-url" %}'" type="button" class="btn btn-primary" value="確認送出"></td> {% endcomment %}
+        </form>
+    </div>
+{% endblock %}

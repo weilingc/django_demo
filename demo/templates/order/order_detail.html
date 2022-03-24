@@ -1,0 +1,41 @@
+<!-- order_detail.html -->
+{% extends 'base.html' %}
+{% load i18n %}
+{% block title %} 訂單內容 {% endblock %}
+{% block content %}
+    <div class='container'>
+        <div class='row'>
+            <div class='col-md-12'>
+                <div class='panel panel-default'>
+                    <div class='panel-heading' align=center>
+                        <h3>訂單編號：{{order.id}}</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container-fluid px-5 mt-5">
+        <table class="table table-responsive table-hover mt-3 min-height-30">
+            <thead>
+                <tr class="table-Warning">
+                    <th>產品名稱</th>
+                    <th>單價</th>
+                    <th>數量</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for item in order_items %}
+                    <tr>
+                        <td>{{ item.product }}</td>
+                        <td>{{ item.price }}</td>
+                        <td>{{ item.qty }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+            <tfoot>
+            <td>總金額：{{order.total}}</td>
+            </tfoot>
+        </table>
+    </div>
+{% endblock %}

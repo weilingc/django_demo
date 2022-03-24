@@ -1,0 +1,45 @@
+<!-- product_info.html -->
+{% extends 'base.html' %}
+{% load bootstrap3 %}
+{% load i18n %}
+{% block title %} 產品名 {% endblock %}
+{% block content %}
+    <div class='container'>
+        <div class='row'>
+            <div class='col-md-12'>
+                <div class='panel panel-warning'>
+                    <div class='panel-heading' align=center>
+                        <h3>{% trans "Product Detail" %}</h3>
+                    </div> 
+                </div>
+            </div>
+        </div>
+        <div class='row'>
+            <div class='col-sm-5'>
+                <img src='{{ product.image }}' width="60%">
+            </div>
+            <div class='col-sm-5'>
+                <h3>{{product.name}}</h3>
+                <h4>{% trans "Price" %}：{{product.price}}</h4>
+                <h4>{% trans "Stock" %}：{{product.stock}}</h4>
+                <form action="{% url 'cart_add-url' product.id %}" method="POST">
+                    {% csrf_token %}
+                    {% bootstrap_form cart_product_form show_label=False %}
+                    {% buttons %}
+                        <button type="submit" class="btn btn-success btn-product">
+                            <span class="glyphicon glyphicon-shopping-cart"></span>{% trans "add to car" %}
+                        </button>
+                    {% endbuttons %}
+                    {% comment %} <div class='input-group'>
+                        <div class="ml-auto">
+                            {{ cart_product_form.quantity }} <span></span><input type='submit' value='加到購物車'>
+                        </div>
+                        <div class='input-group-append mr-auto mb-3'>
+                            <input type='submit' value='加到購物車'>
+                        </div> 
+                    </div> {% endcomment %}
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
